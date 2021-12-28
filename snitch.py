@@ -1,4 +1,4 @@
-from http.server import BaseHTTPRequestHandler, HTTPServer
+import http.server
 from colorama import Fore, Back, Style
 
 from sys import argv
@@ -9,7 +9,7 @@ if len(argv) > 1:
 else:
     port = 8080
 
-class Handler(BaseHTTPRequestHandler):
+class Handler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         self.run()
     def do_POST(self):
@@ -21,6 +21,11 @@ class Handler(BaseHTTPRequestHandler):
         print(Fore.LIGHTRED_EX + args[0])
         for key in self.headers.keys():
             print(Fore.MAGENTA + key + ": " + Fore.BLUE + self.headers[key])
+        content_length = self.headers.get('Content-Length')
+        if content_length is not None:
+            content_len = int(content_length)
+            post_body = self.rfile.read(content_len)
+            print(Fore.GREEN + post_body.decode("utf-8"))
         Style.RESET_ALL
 
     def run(self):
@@ -31,6 +36,6 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(bytes(message, "utf8"))
 
 
-with HTTPServer(('', port), Handler) as server:
+with http.server.HTTPServer(('', port), Handler) as server:
     print(Fore.GREEN + "HTTP Snitch server started at port " + Fore.RED + str(port))
     server.serve_forever()
