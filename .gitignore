@@ -1,0 +1,5 @@
+.idea
+/.eggs/
+/build/
+/dist/
+.DS_Store
