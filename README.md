@@ -26,6 +26,17 @@ This will run HTTP-SNITCH on port 8080, if you want to run it on a different por
 python3 snitch.py 9090
 ```
 
+# Run using Docker
+1. Pull the docker image
+```
+docker pull meshredded/http-snitch
+```
+2. run the image in a new container
+```
+docker run -p 9999:8080  meshredded/http-snitch 
+```
+> The above command will run the container and map the internal port 8080 to the external port 9999 so you can test http-snitch on the following adress: http://localhost:9999/
+
 # Demo
 Running HTTP-SNITCH in a GitHub Workspace would result the following:
 ![Sans titre](https://user-images.githubusercontent.com/10856604/183052857-427d2f48-a080-41aa-b5c0-c0613b820ede.png)
