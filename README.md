@@ -33,7 +33,7 @@ docker pull meshredded/http-snitch
 ```
 2. run the image in a new container
 ```
-docker run -p 9999:8080  meshredded/http-snitch 
+docker run -p 9999:8080 --name http-snitch  meshredded/http-snitch 
 ```
 > The above command will run the container and map the internal port 8080 to the external port 9999 so you can test http-snitch on the following adress: http://localhost:9999/
 
